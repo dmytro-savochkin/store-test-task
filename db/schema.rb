@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171028083710) do
+ActiveRecord::Schema.define(version: 20171028090117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,10 @@ ActiveRecord::Schema.define(version: 20171028083710) do
     t.string   "publisher"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "prime_name"
   end
+
+  add_index "books", ["prime_name"], name: "index_books_on_prime_name", using: :btree
 
   create_table "genreings", force: :cascade do |t|
     t.integer  "genre_id"
