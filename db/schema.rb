@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171028071002) do
+ActiveRecord::Schema.define(version: 20171028083710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,21 +25,49 @@ ActiveRecord::Schema.define(version: 20171028071002) do
   create_table "articles", force: :cascade do |t|
     t.string   "name"
     t.text     "body"
-    t.string   "authors"
-    t.string   "genres"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "authors", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "authors", ["name"], name: "index_authors_on_name", unique: true, using: :btree
+
+  create_table "authorships", force: :cascade do |t|
+    t.integer  "author_id"
+    t.string   "writeable_type"
+    t.integer  "writeable_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "books", force: :cascade do |t|
     t.string   "name"
     t.boolean  "available"
-    t.string   "genres"
-    t.string   "authors"
     t.string   "publisher"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "genreings", force: :cascade do |t|
+    t.integer  "genre_id"
+    t.string   "writeable_type"
+    t.integer  "writeable_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "genres", ["name"], name: "index_genres_on_name", unique: true, using: :btree
 
   create_table "lists", force: :cascade do |t|
     t.string   "name"
