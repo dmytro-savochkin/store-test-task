@@ -1,0 +1,10 @@
+/.bundle
+/log/*
+/tmp
+/config/application.yml
+/vendor/bundle
+.idea
+/public/uploads
+dump.rdb
+*.db
+store.pgdb
